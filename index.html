@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <link rel="shortcut icon" type="image/x-icon" href="logo.svg">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>FreshValue — умная уценка скоропортящихся товаров</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+:root{color-scheme:light;--bg:#E2E2E2;--panel:#EDEDED;--line:rgba(0,0,0,.1);--tx:#1E1E1E;--mu:#666;--g:#C8454A;--a:#8F2B30;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{margin:0;background:var(--bg);color:var(--tx);font:400 16px/1.55 Montserrat,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;font-variant-numeric:tabular-nums}
+.w{max-width:1120px;margin:0 auto;padding:0 24px}
+a{color:inherit;text-decoration:none}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
+header .w{display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:20px;letter-spacing:-.02em}
+.logo b{color:var(--g);font-weight:700}
+nav{display:flex;gap:28px;font-size:14px;color:var(--mu)}
+nav a:hover{color:var(--tx)}
+.btn{display:inline-block;border:0;cursor:pointer;font:600 14px Montserrat,sans-serif;padding:12px 24px;border-radius:999px;background:var(--g);color:#fff}
+.btn.o{background:none;color:var(--tx);border:1px solid var(--line)}
+.btn:hover{filter:brightness(1.1)}
+.hero{padding:88px 0 72px}
+.hero .w{display:grid;grid-template-columns:1.25fr .75fr;gap:56px;align-items:center}
+h1{font-size:clamp(30px,4.4vw,52px);line-height:1.04;letter-spacing:-.035em;margin:0 0 22px;font-weight:800}
+h1 em{font-style:normal;color:var(--a)}
+.lead{color:var(--mu);font-size:18px;max-width:520px;margin:0 0 32px}
+.tag{background:#F7F7F7;color:#1E1E1E;border-radius:10px;padding:26px 26px 22px;position:relative;transform:rotate(-2.5deg);box-shadow:0 18px 0 -12px rgba(200,69,74,.35)}
+.tag::before{content:"";position:absolute;top:14px;right:16px;width:12px;height:12px;border-radius:50%;background:var(--bg)}
+.tag small{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#64748B;font-weight:600}
+.tag .nm{font-size:22px;font-weight:700;margin:6px 0 14px}
+.tag s{color:#94A3B8;font-size:18px}
+.tag .np{font-size:54px;font-weight:800;letter-spacing:-.03em;line-height:1}
+.tag .np i{font-style:normal;font-size:15px;background:var(--g);color:#fff;padding:3px 8px;border-radius:4px;vertical-align:middle;margin-left:8px;letter-spacing:0}
+.tag p{margin:14px 0 0;font-size:13px;color:#475569}
+section{padding:72px 0;border-top:1px solid var(--line)}
+.lab{font-size:13px;color:var(--g);font-weight:600;letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px}
+h2{font-size:clamp(26px,3.4vw,38px);letter-spacing:-.025em;line-height:1.1;margin:0 0 12px;font-weight:700}
+.sub{color:var(--mu);max-width:600px;margin:0 0 36px}
+.grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:20px}
+.box{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:24px}
+.seg{display:flex;background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:3px;gap:3px}
+.seg button{flex:1;border:0;background:none;color:var(--mu);font:500 13px Montserrat,sans-serif;padding:9px 10px;border-radius:999px;cursor:pointer}
+.seg button.on{background:var(--g);color:#fff;font-weight:600}
+.fld{margin-top:20px}
+.fld label{display:flex;justify-content:space-between;font-size:14px;color:var(--mu);margin-bottom:8px}
+.fld label output{color:var(--tx);font-weight:600}
+input[type=range]{width:100%;accent-color:var(--g);height:4px}
+.fld.off{opacity:.35;pointer-events:none}
+#qs{width:100%;font:500 14px Montserrat,sans-serif;padding:11px 16px;border-radius:999px;border:1px solid var(--line);background:var(--bg);color:var(--tx);outline:0}
+#qs:focus{border-color:var(--g)}
+.plist{margin-top:10px;max-height:216px;overflow-y:auto;border:1px solid var(--line);border-radius:10px;background:var(--bg)}
+.ph{position:sticky;top:0;background:var(--bg);font-size:11px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--mu);padding:8px 14px 4px}
+.pi{display:flex;justify-content:space-between;width:100%;border:0;background:none;color:var(--tx);font:500 14px Montserrat,sans-serif;padding:9px 14px;cursor:pointer;text-align:left}
+.pi i{font-style:normal;color:var(--mu)}
+.pi:hover{background:rgba(0,0,0,.05)}
+.pi.on{background:var(--g);color:#fff}.pi.on i{color:#fff}
+.pe{padding:16px;font-size:14px;color:var(--mu)}
+.dec{border-left:3px solid var(--a);padding:2px 0 2px 18px}
+.dec small{color:var(--mu);font-size:13px}
+.dec .big{font-size:clamp(24px,3vw,32px);font-weight:700;letter-spacing:-.02em;line-height:1.2;margin:4px 0 0}
+.dec .big span{color:var(--a)}
+.why{margin:20px 0 0;font-size:15px;color:#444}
+.why b{display:block;font-size:12px;letter-spacing:.07em;text-transform:uppercase;color:var(--g);margin-bottom:6px}
+.sc{overflow-x:auto;margin-top:22px}
+table{width:100%;border-collapse:collapse;font-size:15px;min-width:420px}
+th,td{padding:12px 8px;text-align:right;border-bottom:1px solid var(--line)}
+th:first-child,td:first-child{text-align:left}
+th{font-size:12px;color:var(--mu);font-weight:500;letter-spacing:.04em;text-transform:uppercase}
+tr.best td{color:var(--g);font-weight:600}
+td.neg{color:#B3261E}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:24px 0 20px}
+.k{border-top:2px solid var(--g);padding-top:14px}
+.k .v{font-size:34px;font-weight:800;letter-spacing:-.03em;line-height:1.1}
+.k .t{font-size:14px;color:var(--mu)}
+.k.am{border-color:var(--a)}
+.cv{height:280px;position:relative}
+.phone{max-width:340px;margin:0 auto;border:1px solid rgba(0,0,0,.25);border-radius:30px;padding:18px 14px 22px;background:var(--bg)}
+.phone h3{margin:2px 6px 14px;font-size:16px}
+.task{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px;margin-bottom:10px}
+.task .r{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.task b{font-size:16px}.task span{font-size:13px;color:var(--mu)}
+.task .btn{width:100%;margin-top:12px;background:var(--g);color:#fff;padding:11px}
+.task.done .btn{background:none;border:1px solid var(--g);color:var(--g);cursor:default;filter:none}
+.note{font-size:13px;color:var(--mu);margin-top:16px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.chip{border:1px solid var(--line);background:var(--bg);color:var(--tx);font:600 13px Montserrat,sans-serif;padding:8px 13px;border-radius:999px;cursor:pointer}
+.chip.rec{border:1px dashed var(--g)}
+.chip.on{background:var(--g);border:1px solid var(--g);color:#fff}
+.res{display:grid;gap:14px;margin-top:6px}
+.res div{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--line);padding-bottom:12px}
+.res div span{color:var(--mu);font-size:15px}.res div b{font-size:24px;letter-spacing:-.02em}
+.res .net b{font-size:40px;color:var(--g)}.res .net.loss b{color:#B3261E}
+footer{border-top:1px solid var(--line);padding:36px 0;color:var(--mu);font-size:14px}
+footer .w{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+@media(max-width:860px){.hero .w,.grid{grid-template-columns:1fr}.hero{padding-top:48px}.kpis{grid-template-columns:1fr}nav{display:none}.tag{max-width:340px}}
+</style>
+</head>
+<body>
+<header><div class="w">
+<a class="logo" href="#top"><svg width="34" height="34" viewBox="0 0 48 48" aria-hidden="true"><g transform="rotate(38 24 24)"><path d="M12 4h24a2 2 0 0 1 2 2v34l-14 6-14-6V6a2 2 0 0 1 2-2z" fill="#C8454A"/><circle cx="24" cy="10" r="2.6" fill="#E2E2E2"/><path d="M17 17h14l-5 7 5 7H17l5-7z" fill="none" stroke="#fff" stroke-width="2.2" stroke-linejoin="round"/><path d="M20 28.5h8l2.2 2.5H17.8z" fill="#fff"/><path d="M21 19.5h6l-3 3.6z" fill="#fff"/></g></svg><span>Fresh<b>Value</b></span></a>
+<nav><a href="#calc">Калькулятор</a><a href="#views">Интерфейсы</a><a href="#roi">Окупаемость</a></nav>
+<a class="btn" href="#calc">Попробовать</a>
+</div></header>
+
+<main id="top">
+<div class="hero"><div class="w">
+<div>
+<h1>Уценяйте вовремя,<br>а&nbsp;не&nbsp;<em>списывайте</em></h1>
+<p class="lead">FreshValue считает, когда и насколько снижать цену на молочку, десерты и готовую еду, пока товар ещё можно продать. Свежий продукт. Точная цена. Максимум прибыли.</p>
+<a class="btn" href="#calc">Открыть калькулятор</a>
+</div>
+<div class="tag" aria-live="polite"><small>Сейчас в калькуляторе</small><div class="nm" id="hN"></div><s id="hO"></s><div class="np"><span id="hP"></span><i id="hD"></i></div><p id="hT"></p></div>
+</div></div>
+
+<section id="calc"><div class="w">
+<div class="lab">01 — Калькулятор уценки</div>
+<h2>Задайте остаток и срок — алгоритм предложит цену</h2>
+<p class="sub">Двигайте ползунки: решение, пояснение и таблица сценариев пересчитываются сразу.</p>
+<div class="grid">
+<div class="box">
+<input id="qs" type="search" placeholder="Найти товар: йогурт, ролл, сёмга…" autocomplete="off"><div class="plist" id="pl"></div>
+<div class="fld"><label>Остаток, шт. <output id="oS"></output></label><input type="range" id="iS" min="1" max="60" value="14"></div>
+<div class="fld"><label>Часов до конца срока <output id="oH"></output></label><input type="range" id="iH" min="1" max="48" value="10"></div>
+<div class="fld"><label>Цена, ₽ <output id="oP"></output></label><input type="range" id="iP" min="20" max="800" step="5" value="100"></div>
+<div class="fld" id="fC"><label>Себестоимость, ₽ <output id="oC"></output></label><input type="range" id="iC" min="5" max="700" step="5" value="62"></div>
+<div class="fld"><label>Качество данных</label>
+<div class="seg" id="q"><button data-f="1" class="on">Полные данные</button><button data-f="0">Упрощённый режим</button></div></div>
+</div>
+<div class="box">
+<div class="dec"><small>Решение алгоритма</small><div class="big" id="dec"></div></div>
+<p class="why"><b>AI-пояснение</b><span id="why"></span></p>
+<div class="sc"><table><thead><tr><th>Скидка</th><th>Выручка</th><th>Ост. шт.</th><th id="thP">Прибыль</th></tr></thead><tbody id="tb"></tbody></table></div>
+</div>
+</div></div></section>
+
+<section id="views"><div class="w">
+<div class="lab">02 — Два интерфейса</div>
+<h2>Управляющий видит цифры, продавец — задачи</h2>
+<p class="sub">Переключите вид. В телефоне продавца выберите скидку на товар — показатели управляющего изменятся.</p>
+<div class="seg" id="vw" style="max-width:380px;margin-bottom:24px"><button data-v="m" class="on">Вид управляющего</button><button data-v="s">Вид продавца</button></div>
+<div id="vm" class="box">
+<div class="kpis">
+<div class="k"><div class="v" id="k1"></div><div class="t">Спасённая выручка</div></div>
+<div class="k am"><div class="v" id="k2"></div><div class="t">Доля списаний</div></div>
+<div class="k"><div class="v" id="k3"></div><div class="t">Принятых советов</div></div>
+</div>
+<div class="cv"><canvas id="ch"></canvas></div>
+<div class="note">График строится по параметрам из калькулятора выше: как скидка меняет ожидаемые продажи и результат.</div>
+</div>
+<div id="vs" hidden><div class="phone"><h3>Задачи на смену</h3><p class="note" style="margin:-6px 6px 14px">Выберите скидку. Пунктиром отмечен совет алгоритма.</p><div id="tl"></div></div>
+<p class="note" style="text-align:center"><a href="#" id="rs" style="text-decoration:underline">Сбросить демо</a></p></div>
+</div></section>
+
+<section id="roi"><div class="w">
+<div class="lab">03 — Окупаемость для сети</div>
+<h2>Сколько магазин сохранит за месяц</h2>
+<p class="sub">Введите текущие списания магазина. Тариф — 9&nbsp;900&nbsp;₽ в месяц за магазин, долю снижения списаний можно менять.</p>
+<div class="grid">
+<div class="box">
+<div class="fld" style="margin-top:0"><label>Списания в месяц, ₽ <output id="oW"></output></label><input type="range" id="iW" min="50000" max="3000000" step="10000" value="300000"></div>
+<div class="fld"><label>Снижение списаний, % <output id="oR"></output></label><input type="range" id="iR" min="10" max="50" value="30"></div>
+</div>
+<div class="box"><div class="res">
+<div><span>Экономия на списаниях</span><b id="r1"></b></div>
+<div><span>Стоимость подписки</span><b id="r2"></b></div>
+<div class="net" id="nt"><span id="l3">Чистая прибыль в месяц</span><b id="r3"></b></div>
+<div style="border:0"><span>Возврат на каждый рубль подписки</span><b id="r4"></b></div>
+</div></div>
+</div></div></section>
+</main>
+
+<footer><div class="w"><span>FreshValue · Свежий продукт. Точная цена. Максимум прибыли.</span></div></footer>
+
+<script>
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const rub=n=>Math.round(n).toLocaleString('ru-RU')+' ₽';
+const L=[
+['y','Молочные','Йогурт',.9,1.6,[14,10,100,62]],['a1','Молочные','Кефир 1%',.7,1.5,[12,12,85,55]],['a2','Молочные','Творог 5%',.5,1.5,[10,14,120,78]],['a3','Молочные','Сметана 20%',.55,1.4,[10,14,95,62]],['a4','Молочные','Молоко пастеризованное',1,1.3,[16,16,90,62]],['a5','Молочные','Сырок глазированный',.8,1.7,[18,12,45,28]],['a6','Молочные','Сливки 33%',.3,1.5,[8,16,140,92]],
+['t','Выпечка и десерты','Торт',.25,2.1,[4,8,420,220]],['b1','Выпечка и десерты','Круассан',1.1,1.9,[15,6,95,48]],['b2','Выпечка и десерты','Эклер',.6,2,[12,8,110,60]],['b3','Выпечка и десерты','Чизкейк, порция',.4,2,[8,8,230,130]],['b4','Выпечка и десерты','Булочка с корицей',.9,1.8,[14,6,75,36]],['b5','Выпечка и десерты','Маффин',.7,1.9,[12,10,85,44]],['b6','Выпечка и десерты','Хлеб бездрожжевой',.8,1.4,[14,10,70,40]],
+['s','Готовая еда','Сэндвич',.6,1.8,[6,6,180,105]],['c1','Готовая еда','Ролл с курицей',.5,1.8,[8,8,210,125]],['c2','Готовая еда','Салат «Цезарь»',.45,1.9,[8,8,240,140]],['c3','Готовая еда','Борщ, порция',.35,1.7,[8,10,190,105]],['c4','Готовая еда','Плов с курицей',.4,1.7,[10,8,260,150]],['c5','Готовая еда','Паста карбонара',.35,1.8,[8,8,290,165]],['c6','Готовая еда','Котлета с гарниром',.4,1.7,[8,8,250,145]],
+['d1','Мясо и рыба','Колбаса варёная',.35,1.4,[10,24,320,210]],['d2','Мясо и рыба','Сосиски молочные',.5,1.4,[12,24,210,135]],['d3','Мясо и рыба','Филе курицы охл.',.6,1.6,[12,20,380,260]],['d4','Мясо и рыба','Сёмга слабосолёная',.25,1.7,[6,20,520,360]],
+['e1','Овощи и фрукты','Салат-микс',.5,1.6,[10,14,130,75]],['e2','Овощи и фрукты','Клубника',.4,1.9,[10,10,350,210]],['e3','Овощи и фрукты','Фруктовая нарезка',.35,1.9,[8,8,190,105]],['e4','Овощи и фрукты','Зелень, укроп и петрушка',.7,1.5,[12,16,60,32]]];
+const P=Object.fromEntries(L.map(([id,c,n,lam,e,v])=>[id,{c,n,lam,e,v}]));
+const S={k:'y',st:14,h:10,pr:100,c:62,full:true};
+function sim(p,st,h,pr,c,d,full){const sold=Math.min(st,Math.round(p.lam*h*(1+p.e*d))),rev=sold*pr*(1-d);return{d,sold,left:st-sold,rev,profit:full?rev-st*c:null}}
+function best(p,st,h,pr,c,full){let b=null;for(let i=0;i<=10;i++){const r=sim(p,st,h,pr,c,i*.05,full),v=full?r.profit:r.rev;if(!b||v>b.v+1e-9){b=r;b.v=v}}return b}
+const sg=n=>(n>=0?'+':'−')+rub(Math.abs(n));
+
+function calc(){
+ const p=P[S.k],b=best(p,S.st,S.h,S.pr,S.c,S.full),z=sim(p,S.st,S.h,S.pr,S.c,0,S.full),pc=Math.round(b.d*100),np=S.pr*(1-b.d);
+ $('#oS').textContent=S.st;$('#oH').textContent=S.h;$('#oP').textContent=rub(S.pr);$('#oC').textContent=rub(S.c);
+ $('#fC').classList.toggle('off',!S.full);
+ $('#dec').innerHTML=pc?`Рекомендуем скидку <span>${pc}%</span> (${rub(np)})`:`Скидка не нужна, держим <span>${rub(S.pr)}</span>`;
+ const gain=S.full?b.profit-z.profit:b.rev-z.rev,what=S.full?'прибыли':'выручке',loss=S.full&&b.profit<0;
+ let w=`До конца срока ${S.h} ч. По полной цене ожидаем продать ${z.sold} из ${S.st} шт., ещё ${z.left} шт. уйдёт в списание. `;
+ w+=pc?`Скидка ${pc}% поднимает продажи до ${b.sold} шт. и ${loss?'сокращает убыток на '+rub(gain):'даёт '+sg(gain)+' к '+what}. ${b.sold>=S.st-.05?'Весь остаток раскупится, глубже снижать цену нет смысла.':'Каждый следующий процент скидки отнимает у маржи больше, чем добавляет продаж.'}`:'Скидка не окупается: спрос и так покрывает остаток или маржа слишком тонкая.';
+ if(loss)w+=' Даже при лучшей цене партия уходит в убыток '+rub(-b.profit)+': себестоимость выше возможной выручки.';
+ if(!S.full)w+=' Себестоимость не задана, поэтому алгоритм честно оптимизирует выручку, а не прибыль.';
+ $('#why').textContent=w;
+ const allNeg=S.full&&[0,.15,.3].every(d=>sim(p,S.st,S.h,S.pr,S.c,d,true).profit<0);$('#thP').textContent=!S.full?'Прибыль (нет данных)':allNeg?'Убыток':'Прибыль';
+ $('#tb').innerHTML=[0,.15,.3].map(d=>{const r=sim(p,S.st,S.h,S.pr,S.c,d,S.full),isB=Math.abs(b.d-d)<.001;return `<tr class="${isB?'best':''}"><td>${Math.round(d*100)}%${isB?' ←':''}</td><td>${rub(r.rev)}</td><td>${r.left}</td><td class="${r.profit<0?'neg':''}">${S.full?rub(allNeg?-r.profit:r.profit):'—'}</td></tr>`}).join('');
+ $('#hN').textContent=p.n;$('#hO').textContent=pc?rub(S.pr):'';$('#hP').textContent=rub(np);$('#hD').textContent=pc?'−'+pc+'%':'';$('#hD').style.display=pc?'':'none';
+ $('#hT').textContent=`Остаток ${S.st} шт., до конца срока ${S.h} ч`;
+ if(window.ch){const L=[],A=[],B=[];for(let i=0;i<=10;i++){const r=sim(p,S.st,S.h,S.pr,S.c,i*.05,S.full);L.push(i*5+'%');A.push(r.sold);B.push(Math.round(S.full?r.profit:r.rev))}
+  ch.data.labels=L;ch.data.datasets[0].data=A;ch.data.datasets[1].data=B;ch.data.datasets[1].label=S.full?'Прибыль / убыток, ₽':'Выручка, ₽';ch.update('none')}
+}
+function renderList(){
+ const q=$('#qs').value.trim().toLowerCase();let last='',h='';
+ for(const [k,p] of Object.entries(P)){if(q&&!(p.n+' '+p.c).toLowerCase().includes(q))continue;
+  if(p.c!=last){h+=`<div class="ph">${p.c}</div>`;last=p.c}
+  h+=`<button class="pi ${k==S.k?'on':''}" data-k="${k}"><span>${p.n}</span><i>${p.v[2]} ₽</i></button>`}
+ $('#pl').innerHTML=h||'<div class="pe">Ничего не найдено</div>';
+ $$('#pl .pi').forEach(b=>b.onclick=()=>{S.k=b.dataset.k;[S.st,S.h,S.pr,S.c]=P[S.k].v;$('#iS').value=S.st;$('#iH').value=S.h;$('#iP').value=S.pr;$('#iC').value=S.c;renderList();calc()});
+}
+$('#qs').oninput=renderList;
+[['iS','st'],['iH','h'],['iP','pr'],['iC','c']].forEach(([i,k])=>$('#'+i).oninput=e=>{S[k]=+e.target.value;calc()});
+$$('#q button').forEach(x=>x.onclick=()=>{S.full=x.dataset.f=='1';$$('#q button').forEach(y=>y.classList.toggle('on',y==x));calc()});
+
+/* задачи продавца */
+const T0=[['y','B3',14,10,100,62],['t','D1',4,8,420,220],['s','A2',6,6,180,105],['y','B5',20,5,100,62],['s','C4',8,4,180,105]];
+let T=[];
+function reset(){T=T0.map(([k,sh,st,h,pr,c])=>({k,sh,st,pr,h,c,rec:best(P[k],st,h,pr,c,true),base:sim(P[k],st,h,pr,c,0,true),ap:null}));kp()}
+function kp(){
+ const ev=t=>sim(P[t.k],t.st,t.h,t.pr,t.c,t.ap,true),saved=T.reduce((a,t)=>a+(t.ap!=null?ev(t).rev-t.base.rev:0),0),left=T.reduce((a,t)=>a+(t.ap!=null?ev(t).left:t.base.left),0),all=T.reduce((a,t)=>a+t.st,0),n=T.filter(t=>t.ap!=null&&Math.abs(t.ap-t.rec.d)<.001).length;
+ $('#k1').textContent=rub(saved);$('#k2').textContent=(left/all*100).toFixed(1).replace('.',',')+'%';$('#k3').textContent=Math.round(n/T.length*100)+'%';
+ $('#tl').innerHTML=T.map((t,i)=>{const ds=[...new Set([.1,.2,.3,.4,+t.rec.d.toFixed(2)])].filter(d=>d>0).sort((a,b)=>a-b),cur=t.ap!=null?t.ap:t.rec.d;return `<div class="task"><div class="r"><b>${P[t.k].n}, полка ${t.sh}</b><span>${t.st} шт.</span></div><span>${t.pr} ₽ → ${rub(t.pr*(1-cur))}${t.ap==null?' (совет)':''}</span><div class="chips">${ds.map(d=>`<button class="chip${Math.abs(d-t.rec.d)<.001?' rec':''}${t.ap!=null&&Math.abs(d-t.ap)<.001?' on':''}" data-i="${i}" data-d="${d}">−${Math.round(d*100)}%</button>`).join('')}</div></div>`}).join('');
+ $$('#tl .chip').forEach(b=>b.onclick=()=>{T[b.dataset.i].ap=+b.dataset.d;kp()});
+}
+$('#rs').onclick=e=>{e.preventDefault();reset()};
+$$('#vw button').forEach(x=>x.onclick=()=>{const m=x.dataset.v=='m';$('#vm').hidden=!m;$('#vs').hidden=m;$$('#vw button').forEach(y=>y.classList.toggle('on',y==x));if(m&&window.ch)ch.resize()});
+
+/* окупаемость */
+function roi(){const w=+$('#iW').value,r=+$('#iR').value,sv=w*r/100,sub=9900;
+ $('#oW').textContent=rub(w);$('#oR').textContent=r+'%';$('#r1').textContent=rub(sv);$('#r2').textContent=rub(sub);const nt=sv-sub;$('#l3').textContent=nt<0?'Чистый убыток в месяц':'Чистая прибыль в месяц';$('#r3').textContent=nt<0?rub(-nt):sg(nt);$('#nt').classList.toggle('loss',nt<0);$('#r4').textContent=(sv/sub).toFixed(1).replace('.',',')+' ₽'}
+$('#iW').oninput=$('#iR').oninput=roi;
+
+window.addEventListener('load',()=>{
+ Chart.defaults.color='#666';Chart.defaults.font.family='Montserrat,sans-serif';
+ window.ch=new Chart($('#ch'),{type:'line',data:{labels:[],datasets:[{label:'Ожидаемые продажи, шт.',data:[],borderColor:'#2A2A2A',backgroundColor:'#2A2A2A',yAxisID:'y',tension:.3,pointRadius:3},{label:'Прибыль, ₽',data:[],borderColor:'#C8454A',backgroundColor:'#C8454A',yAxisID:'y1',tension:.3,pointRadius:3}]},
+ options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},scales:{x:{grid:{color:'rgba(0,0,0,.07)'},title:{display:true,text:'Скидка'}},y:{position:'left',grid:{color:'rgba(0,0,0,.07)'}},y1:{position:'right',grid:{display:false}}},plugins:{legend:{labels:{boxWidth:10,usePointStyle:true}}}}});
+ calc();
+});
+reset();renderList();calc();roi();
+</script>
+</body>
+</html>
